@@ -11,3 +11,14 @@ class Post(models.Model):
         ordering = ('-pub_date',)
     def __str__(self):
         return self.title
+class Country(models.Model):
+    country_id = models.IntegerField()
+    name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
+class City(models.Model):
+    name = models.CharField(max_length=50)
+    population = models.IntegerField()
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name

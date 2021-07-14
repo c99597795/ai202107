@@ -20,4 +20,6 @@ from mysite import views
 urlpatterns = [
     path('',views.index),
     path('admin/', admin.site.urls),
+    path('news/',views.news),
+    path('show/<int:id>/',views.show)
 ]
