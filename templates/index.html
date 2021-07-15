@@ -5,5 +5,8 @@
 {% block main %}
   <hr>
 	    特別號：{{special}}<br>
-	    樂透號碼：{{ lotto }}
+	    樂透號碼：{{ lotto }}<br>
+		{% autoescape off %}
+      	{{ plot_div }}
+      	{% endautoescape %}
 {% endblock %}
