@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}馬路消息 {% endblock %}
+{% block headmessage %} 我的馬路消息 {% endblock %}
+{% block main %}
+    <hr>
+    <form action="/addnote/" method=POST>
+        {% csrf_token %}
+        你的消息內容：<input name='note' type=text size=20>
+        <input type=submit value="儲存">
+    </form>
+    <table class="table table-striped">
+        <tr>
+            <td>標題</td>
+            <td>張貼日期</td>
+            {% if request.user.is_superuser %}
+            <td>管理</td>
+            {% endif %}
+        </tr>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.id }}</td>
+                <td>
+                    {{ note.title}}
+                </td>
+                <td>{{ note.pub_date }}</td>
+                {% if request.user.is_superuser %}
+                <td><a class="btn btn-warning"href="/deletenote/{{note.id}}">刪除</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

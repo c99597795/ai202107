@@ -18,12 +18,15 @@ from django.urls import path
 from mysite import views
 
 urlpatterns = [
+    path('addnote/',views.addnote),
     path('logout/',views.mylogout),
+    path('note/',views.note),
     path('chart/',views.chart),
     path('rank/',views.rank),
     path('',views.index),
     path('admin/', admin.site.urls),
     path('news/',views.news),
     path('show/<int:id>/',views.show),
-    path('delete/<int:id>/',views.delete)
+    path('delete/<int:id>/',views.delete),
+    path('deletenote/<int:id>/',views.deletenote)
 ]

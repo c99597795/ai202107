@@ -7,7 +7,7 @@ from plotly.offline import plot
 import plotly.graph_objs as go
 import numpy as np
 
-from mysite.models import Post,Country,City
+from mysite.models import Post,Country,City,Note
 
 # Create your views here.
 def index(request):
@@ -74,3 +74,20 @@ def delete(request,id):
     except:
         return redirect("/news/")
     return redirect("/news/")
+def deletenote(request,id):
+    try:
+        note=Note.objects.get(id=id)
+        note.delete()
+    except:
+        return redirect("/note/")
+    return redirect("/note/")
+def addnote(request):
+    if request.method == 'POST':
+        title=request.POST["note"]
+        if len(title) > 10:
+            note = Note(title=title)
+            note.save()
+    return redirect("/note/")
+def note(request):
+    notes = Note.objects.all()
+    return render(request,"note.html",locals())
